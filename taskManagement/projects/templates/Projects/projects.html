@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Users</h1>
+
+<table>
+    <tr>
+    <th>user name</th>
+    <th>first name</th>
+    <th>last name</th>
+    </tr>
+    {% for user in users%}
+    <tr>
+        <td>{{user.userName}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td><a href="{% url 'update-user' user.id %}">update</a></td>
+    </tr>
+    {% endfor %} 
+</table>
+
+
+<h1>Tasks</h1>
+
+<table>
+    <tr>
+    <th>Title</th>
+    <th>description</th>
+    <th>priority</th>
+    <th>state</th>
+    <th>deadline</th>
+    <th>owner</th>
+    </tr>
+    {% for task in tasks%}
+    <tr>
+        <td>{{task.title}}</td>
+        <td>{{task.description}}</td>
+        <td>{{task.priority}}</td>
+        <td>{{task.state}}</td>
+        <td>{{task.deadLine}}</td>
+        <td>{{task.owner}}</td>
+
+        <td><a href="{% url 'update-task' task.id %}">update</a></td>
+    </tr>
+    {% endfor %} 
+</table>
+
+{% endblock content %}
