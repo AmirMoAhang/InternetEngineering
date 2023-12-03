@@ -11,8 +11,10 @@ def projects(request):
     tasks = Task.objects.all()
     return render(request, 'Projects/projects.html',{"users": users, 'tasks': tasks})
 
+
 def project(request, pk):
     return render(request, 'Projects/single-project.html')
+
 
 def createUser(request):
     form = UserForm()
@@ -25,7 +27,6 @@ def createUser(request):
         
     context = {'form': form}
     return render(request, 'Projects/user_form.html', context)
-
 
 
 def updateUser(request, pk):
@@ -42,6 +43,11 @@ def updateUser(request, pk):
     return render(request, 'Projects/user_form.html', context)
 
 
+def deleteUser(request, pk):
+    user = User.objects.get(id=pk)
+    user.delete()
+    return redirect('projects')
+
 
 def createTask(request):
     form = TaskForm()
@@ -56,7 +62,6 @@ def createTask(request):
     return render(request, 'Projects/task_form.html', context)
 
 
-
 def updateTask(request, pk):
     task = Task.objects.get(id=pk)
     form = TaskForm(instance=task)
@@ -69,6 +74,12 @@ def updateTask(request, pk):
         
     context = {'form': form}
     return render(request, 'Projects/task_form.html', context)
+
+
+def deleteTask(request, pk):
+    task = Task.objects.get(id=pk)
+    task.delete()
+    return redirect('projects')
 
 
 def createComment(request):
